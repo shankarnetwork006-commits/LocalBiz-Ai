@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LocalBiz AI — Business Assistant</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <div class="brand"><span>✦</span> LocalBiz AI</div>
+  <div class="muted">Your AI business assistant</div>
+  <nav>
+    <button class="nav active" data-page="dashboard">▦ Dashboard</button>
+    <button class="nav" data-page="leads">♙ Leads</button>
+    <button class="nav" data-page="assistant">✦ AI Assistant</button>
+    <button class="nav" data-page="followups">◷ Follow-ups</button>
+    <button class="nav" data-page="appointments">▣ Appointments</button>
+    <button class="nav" data-page="settings">⚙ Settings</button>
+  </nav>
+  <div class="trial"><b>30-day free trial</b><br><span>Upgrade when you're ready.</span><button onclick="showToast('Pricing plans opened')">View plans</button></div>
+</aside>
+<main>
+<header><div><div class="eyebrow">LOCALBIZ AI</div><h1 id="title">Dashboard</h1></div><button class="primary" onclick="openLead()">＋ New Lead</button></header>
+<section id="dashboard" class="page active">
+  <div class="hero"><div><h2>Good morning 👋</h2><p>Manage enquiries, follow-ups and appointments from one place.</p></div><div class="hero-stat"><strong id="heroCount">24</strong><span>leads this month</span></div></div>
+  <div class="cards">
+    <div class="card"><span>New Leads</span><strong>8</strong><small>+12% this week</small></div>
+    <div class="card"><span>Follow-ups</span><strong>5</strong><small>Need attention today</small></div>
+    <div class="card"><span>Appointments</span><strong>7</strong><small>Next 7 days</small></div>
+    <div class="card"><span>Conversions</span><strong>14</strong><small>58% conversion rate</small></div>
+  </div>
+  <div class="grid2">
+    <div class="panel"><div class="panelhead"><h3>Recent leads</h3><button class="link" onclick="go('leads')">View all</button></div><div id="recent"></div></div>
+    <div class="panel"><div class="panelhead"><h3>AI quick actions</h3></div>
+      <div class="quick"><button onclick="ask('Summarize today’s leads')">✦ Summarize today’s leads</button><button onclick="ask('Create a Telugu follow-up message')">✦ Create Telugu follow-up</button><button onclick="ask('Show customers I should call today')">✦ Who should I call today?</button></div>
+    </div>
+  </div>
+</section>
+
+<section id="leads" class="page">
+<div class="toolbar"><input id="search" placeholder="Search leads..." oninput="renderLeads()"><select id="filter" onchange="renderLeads()"><option>All</option><option>New</option><option>Interested</option><option>Contacted</option><option>Converted</option></select></div>
+<div class="panel"><div id="leadTable"></div></div>
+</section>
+
+<section id="assistant" class="page">
+<div class="assistant"><div id="chat" class="chat"><div class="bubble ai"><b>LocalBiz AI</b><br>Namaste! 👋 Ask me about leads, follow-ups, appointments, or marketing messages.</div></div>
+<div class="chips"><button onclick="ask('Give me today’s lead summary')">Today’s summary</button><button onclick="ask('Write a Telugu WhatsApp follow-up')">Telugu follow-up</button><button onclick="ask('Create a sale offer')">Create offer</button></div>
+<div class="composer"><input id="prompt" placeholder="Ask your AI assistant..." onkeydown="if(event.key==='Enter')sendPrompt()"><button class="primary" onclick="sendPrompt()">Send</button></div></div>
+</section>
+
+<section id="followups" class="page"><div class="panel"><div class="panelhead"><h3>Today's follow-ups</h3><button class="primary" onclick="showToast('Follow-up reminder created')">＋ Reminder</button></div><div id="followList"></div></div></section>
+<section id="appointments" class="page"><div class="panel"><div class="panelhead"><h3>Appointments</h3><button class="primary" onclick="showToast('Appointment form opened')">＋ Appointment</button></div><div id="apptList"></div></div></section>
+<section id="settings" class="page"><div class="panel settings"><h3>Business settings</h3><label>Business name<input value="LocalBiz Demo"></label><label>Language<select><option>Telugu + English</option><option>English</option><option>Telugu</option></select></label><label>WhatsApp number<input placeholder="+91"></label><button class="primary" onclick="showToast('Settings saved')">Save settings</button></div></section>
+</main>
+</div>
+
+<div id="modal" class="modal"><div class="modalbox"><button class="close" onclick="closeModal()">×</button><h2>New Lead</h2><input id="lname" placeholder="Customer name"><input id="lphone" placeholder="Phone number"><input id="lreq" placeholder="Requirement"><select id="lstatus"><option>New</option><option>Interested</option><option>Contacted</option><option>Converted</option></select><button class="primary full" onclick="addLead()">Save Lead</button></div></div>
+<div id="toast"></div>
+<script src="app.js"></script>
+</body></html>
